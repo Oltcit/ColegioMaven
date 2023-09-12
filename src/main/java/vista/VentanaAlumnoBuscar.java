@@ -10,12 +10,15 @@ import javax.swing.table.DefaultTableModel;
 
 import controlador.Coordinador;
 import modelo.AlumnoDAO;
+import modelo.AlumnoVO;
 
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 
 public class VentanaAlumnoBuscar extends JFrame {
@@ -79,6 +82,43 @@ public class VentanaAlumnoBuscar extends JFrame {
 		DefaultTableModel modelo = new DefaultTableModel();
 		tabla = new JTable();
 		
+		/*
+		 * btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		 */
+		tabla.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				miCoordinador.mostrarAlumno(pasarAlumno(e));
+				
+			}
+		});
+		
 		tabla.setModel(modelo);
 		modelo.addColumn("DNI");
 		modelo.addColumn("Apellido y nombre");
@@ -89,6 +129,20 @@ public class VentanaAlumnoBuscar extends JFrame {
 		miAlumnoDAO.buscarAlumnos(modelo);
 		
 		scrollpane.setViewportView(tabla);
+	}
+
+	protected AlumnoVO pasarAlumno(MouseEvent e) {
+		AlumnoVO miAlumnoVO = new AlumnoVO();
+		int fila=tabla.rowAtPoint(e.getPoint());
+		miAlumnoVO.setDni(Integer.valueOf(tabla.getValueAt(fila, 0).toString()));
+		miAlumnoVO.setApe(tabla.getValueAt(fila, 1).toString());
+		miAlumnoVO.setFnac(tabla.getValueAt(fila, 2).toString());
+		String estado=tabla.getValueAt(fila, 3).toString();
+		if (estado.equals("false"))
+			miAlumnoVO.setDoc((byte) 0);
+		else
+			miAlumnoVO.setDoc((byte) 1);
+		return miAlumnoVO;
 	}
 
 }

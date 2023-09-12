@@ -211,6 +211,18 @@ private JCheckBox chkDoc;
 		btnBusca.setEnabled(bBusca);
 		btnCancela.setEnabled(bCancela);
 	}
+
+	public void mostrarAlumno(AlumnoVO miAlumnoVO) {
+		txtDni.setText(String.valueOf(miAlumnoVO.getDni()));
+		txtApynom.setText(miAlumnoVO.getApe());
+		txtFNac.setText(miAlumnoVO.getFnac());
+		if (miAlumnoVO.getDoc()==0)
+			chkDoc.setSelected(false);
+		else
+			chkDoc.setSelected(true);
+		
+		habilita(false, false, false, false, false, false, true, true, true, true);
+	}
 	
 }	
 
