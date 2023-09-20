@@ -92,9 +92,20 @@ private JCheckBox chkDoc;
 		panel.add(btnAgrega);
 		
 		btnMod = new JButton("Modificar");
+		btnMod.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				modificarAlumno();
+			}
+		});
 		panel.add(btnMod);
 		
 		btnEli = new JButton("Eliminar");
+		btnEli.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				eliminarAlumno();
+				limpiar();
+			}
+		});
 		panel.add(btnEli);
 		
 		btnBusca = new JButton("Buscar");
@@ -149,6 +160,21 @@ private JCheckBox chkDoc;
 		txtFNac.setColumns(10);
 		
 		habilita(true, false, false, false, false, true, false, false, true, true);
+	}
+
+	protected void modificarAlumno() {
+		accion=2;
+		habilita(false, true, true, true, true, false, false, false, false, true);
+	}
+
+	protected void eliminarAlumno() {
+		int res=JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar ese alumno?","Confirmación",
+				JOptionPane.YES_NO_OPTION);
+		if (res==JOptionPane.YES_NO_OPTION) {
+			AlumnoDAO miAlumnoDAO= new AlumnoDAO();
+			miAlumnoDAO.eliminarAlumno(Integer.valueOf(txtDni.getText()));
+		}
+		
 	}
 
 	protected void buscarAlumno() {

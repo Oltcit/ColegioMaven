@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
@@ -81,7 +82,7 @@ public class VentanaAlumnoBuscar extends JFrame {
 	public void mostrarDatosConTableModel() {
 		DefaultTableModel modelo = new DefaultTableModel();
 		tabla = new JTable();
-		
+	
 		/*
 		 * btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
